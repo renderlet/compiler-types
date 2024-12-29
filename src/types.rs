@@ -36,31 +36,95 @@ pub struct Rule {
 
 #[derive(Debug)]
 pub enum Op {
-    // Center(()),
+    Center(Center),
     Color(Color),
     Comp(Vec<Comp>),
-    // Copy(()),
-    // CornerCut(()),
+    Copy(Copy),
+    CornerCut(CornerCut),
     Extrude(Extrude),
-    // Hemisphere(()),
-    // InnerArch(()),
-    // InnerCircle(()),
-    // InnerSemiCircle(()),
-    // Insert(()),
+    Hemisphere(Hemisphere),
+    InnerArch(InnerArch),
+    InnerCircle(InnerCircle),
+    InnerSemiCircle(InnerSemiCircle),
+    Insert(Insert),
     Offset(Offset),
-    // Pyramid(()),
-    // RoofGable(()),
-    // RoofHip(()),
-    // Rotate(()),
+    Pyramid(Pyramid),
+    RoofGable(RoofGable),
+    RoofHip(RoofHip),
+    Rotate(Rotate),
     SetupProjection(SetupProjection),
-    // ShapeL(()),
-    // ShapeU(()),
+    ShapeL(ShapeL),
+    ShapeU(ShapeU),
     Size(Size),
     Split(Split),
-    // Taper(()),
+    Taper(Taper),
     Texture(Texture),
-    // Translate(()),
+    Translate(Translate),
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Center {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Copy {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CornerCut {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Hemisphere {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct InnerArch {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct InnerCircle {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct InnerSemiCircle {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Insert {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Pyramid {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RoofGable {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RoofHip {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Rotate {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ShapeL {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ShapeU {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Taper {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Translate {}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
