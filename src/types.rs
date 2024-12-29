@@ -64,67 +64,99 @@ pub enum Op {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Center {}
+pub struct Center {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Copy {}
+pub struct Copy {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct CornerCut {}
+pub struct CornerCut {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Hemisphere {}
+pub struct Hemisphere {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct InnerArch {}
+pub struct InnerArch {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct InnerCircle {}
+pub struct InnerCircle {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct InnerSemiCircle {}
+pub struct InnerSemiCircle {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Insert {}
+pub struct Insert {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Pyramid {}
+pub struct Pyramid {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct RoofGable {}
+pub struct RoofGable {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct RoofHip {}
+pub struct RoofHip {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Rotate {}
+pub struct Rotate {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct ShapeL {}
+pub struct ShapeL {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct ShapeU {}
+pub struct ShapeU {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Taper {}
+pub struct Taper {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Translate {}
+pub struct Translate {
+    // TODO: fill in fields
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
