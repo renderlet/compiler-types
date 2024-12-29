@@ -1,7 +1,12 @@
+use std::{
+    fmt::{self, Formatter},
+    marker::PhantomData,
+};
+
 use crate::types::{Color, Comp, Extrude, Offset, Op, SetupProjection, Size, Split, Texture};
 
 impl<'de> serde::Deserialize<'de> for Op {
-    fn deserialize<__D>(__deserializer: __D) -> serde::__private::Result<Self, __D::Error>
+    fn deserialize<__D>(__deserializer: __D) -> Result<Self, __D::Error>
     where
         __D: serde::Deserializer<'de>,
     {
@@ -22,70 +27,65 @@ impl<'de> serde::Deserialize<'de> for Op {
 
         impl<'de> serde::de::Visitor<'de> for __FieldVisitor {
             type Value = __Field;
-            fn expecting(
-                &self,
-                __formatter: &mut serde::__private::Formatter,
-            ) -> serde::__private::fmt::Result {
-                serde::__private::Formatter::write_str(__formatter, "variant identifier")
+            fn expecting(&self, __formatter: &mut Formatter) -> fmt::Result {
+                Formatter::write_str(__formatter, "variant identifier")
             }
-            fn visit_u64<__E>(self, __value: u64) -> serde::__private::Result<Self::Value, __E>
+            fn visit_u64<__E>(self, __value: u64) -> Result<Self::Value, __E>
             where
                 __E: serde::de::Error,
             {
                 match __value {
-                    0u64 => serde::__private::Ok(__Field::__field0),
-                    1u64 => serde::__private::Ok(__Field::__field1),
-                    2u64 => serde::__private::Ok(__Field::__field2),
-                    3u64 => serde::__private::Ok(__Field::__field3),
-                    4u64 => serde::__private::Ok(__Field::__field4),
-                    5u64 => serde::__private::Ok(__Field::__field5),
-                    _ => serde::__private::Err(serde::de::Error::invalid_value(
+                    0u64 => Ok(__Field::__field0),
+                    1u64 => Ok(__Field::__field1),
+                    2u64 => Ok(__Field::__field2),
+                    3u64 => Ok(__Field::__field3),
+                    4u64 => Ok(__Field::__field4),
+                    5u64 => Ok(__Field::__field5),
+                    _ => Err(serde::de::Error::invalid_value(
                         serde::de::Unexpected::Unsigned(__value),
                         &"variant index 0 <= i < 6",
                     )),
                 }
             }
-            fn visit_str<__E>(self, __value: &str) -> serde::__private::Result<Self::Value, __E>
+            fn visit_str<__E>(self, __value: &str) -> Result<Self::Value, __E>
             where
                 __E: serde::de::Error,
             {
                 match __value {
-                    "color" => serde::__private::Ok(__Field::__field0),
-                    "comp" => serde::__private::Ok(__Field::__field1),
-                    "extrude" => serde::__private::Ok(__Field::__field2),
-                    "offset" => serde::__private::Ok(__Field::__field3),
-                    "setupProjection" => serde::__private::Ok(__Field::__field4),
-                    "size" => serde::__private::Ok(__Field::__field5),
-                    "split" => serde::__private::Ok(__Field::__field6),
-                    "texture" => serde::__private::Ok(__Field::__field7),
-                    _ => {
-                        serde::__private::Err(serde::de::Error::unknown_variant(__value, VARIANTS))
-                    }
+                    "color" => Ok(__Field::__field0),
+                    "comp" => Ok(__Field::__field1),
+                    "extrude" => Ok(__Field::__field2),
+                    "offset" => Ok(__Field::__field3),
+                    "setupProjection" => Ok(__Field::__field4),
+                    "size" => Ok(__Field::__field5),
+                    "split" => Ok(__Field::__field6),
+                    "texture" => Ok(__Field::__field7),
+                    _ => Err(serde::de::Error::unknown_variant(__value, VARIANTS)),
                 }
             }
-            fn visit_bytes<__E>(self, __value: &[u8]) -> serde::__private::Result<Self::Value, __E>
+            fn visit_bytes<__E>(self, __value: &[u8]) -> Result<Self::Value, __E>
             where
                 __E: serde::de::Error,
             {
                 match __value {
-                    b"color" => serde::__private::Ok(__Field::__field0),
-                    b"comp" => serde::__private::Ok(__Field::__field1),
-                    b"extrude" => serde::__private::Ok(__Field::__field2),
-                    b"offset" => serde::__private::Ok(__Field::__field3),
-                    b"setupProjection" => serde::__private::Ok(__Field::__field4),
-                    b"size" => serde::__private::Ok(__Field::__field5),
-                    b"split" => serde::__private::Ok(__Field::__field6),
-                    b"texture" => serde::__private::Ok(__Field::__field7),
+                    b"color" => Ok(__Field::__field0),
+                    b"comp" => Ok(__Field::__field1),
+                    b"extrude" => Ok(__Field::__field2),
+                    b"offset" => Ok(__Field::__field3),
+                    b"setupProjection" => Ok(__Field::__field4),
+                    b"size" => Ok(__Field::__field5),
+                    b"split" => Ok(__Field::__field6),
+                    b"texture" => Ok(__Field::__field7),
                     _ => {
-                        let __value = &serde::__private::from_utf8_lossy(__value);
-                        serde::__private::Err(serde::de::Error::unknown_variant(__value, VARIANTS))
+                        let __value = &String::from_utf8_lossy(__value);
+                        Err(serde::de::Error::unknown_variant(__value, VARIANTS))
                     }
                 }
             }
         }
         impl<'de> serde::Deserialize<'de> for __Field {
             #[inline]
-            fn deserialize<__D>(__deserializer: __D) -> serde::__private::Result<Self, __D::Error>
+            fn deserialize<__D>(__deserializer: __D) -> Result<Self, __D::Error>
             where
                 __D: serde::Deserializer<'de>,
             {
@@ -94,199 +94,125 @@ impl<'de> serde::Deserialize<'de> for Op {
         }
         #[doc(hidden)]
         struct __Visitor<'de> {
-            marker: serde::__private::PhantomData<Op>,
-            lifetime: serde::__private::PhantomData<&'de ()>,
+            marker: PhantomData<Op>,
+            lifetime: PhantomData<&'de ()>,
         }
         impl<'de> serde::de::Visitor<'de> for __Visitor<'de> {
             type Value = Op;
-            fn expecting(
-                &self,
-                __formatter: &mut serde::__private::Formatter,
-            ) -> serde::__private::fmt::Result {
-                serde::__private::Formatter::write_str(__formatter, "enum Op")
+            fn expecting(&self, __formatter: &mut Formatter) -> fmt::Result {
+                Formatter::write_str(__formatter, "enum Op")
             }
 
-            fn visit_map<__A>(
-                self,
-                mut __map: __A,
-            ) -> serde::__private::Result<Self::Value, __A::Error>
+            fn visit_map<__A>(self, mut __map: __A) -> Result<Self::Value, __A::Error>
             where
                 __A: serde::de::MapAccess<'de>,
             {
-                let mut __field0: serde::__private::Option<Option<Color>> = serde::__private::None;
-                let mut __field1: serde::__private::Option<Option<Vec<Comp>>> =
-                    serde::__private::None;
-                let mut __field2: serde::__private::Option<Option<Extrude>> =
-                    serde::__private::None;
-                let mut __field3: serde::__private::Option<Option<Offset>> = serde::__private::None;
-                let mut __field4: serde::__private::Option<Option<SetupProjection>> =
-                    serde::__private::None;
-                let mut __field5: serde::__private::Option<Option<Size>> = serde::__private::None;
-                let mut __field6: serde::__private::Option<Option<Split>> = serde::__private::None;
-                let mut __field7: serde::__private::Option<Option<Texture>> =
-                    serde::__private::None;
-                while let serde::__private::Some(__key) =
-                    serde::de::MapAccess::next_key::<__Field>(&mut __map)?
-                {
+                let mut __field0: Option<Color> = None;
+                let mut __field1: Option<Vec<Comp>> = None;
+                let mut __field2: Option<Extrude> = None;
+                let mut __field3: Option<Offset> = None;
+                let mut __field4: Option<SetupProjection> = None;
+                let mut __field5: Option<Size> = None;
+                let mut __field6: Option<Split> = None;
+                let mut __field7: Option<Texture> = None;
+                while let Some(__key) = serde::de::MapAccess::next_key::<__Field>(&mut __map)? {
                     match __key {
                         __Field::__field0 => {
-                            if serde::__private::Option::is_some(&__field0) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("color"),
-                                );
+                            if Option::is_some(&__field0) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "color",
+                                ));
                             }
-                            __field0 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Color>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field0 = Some(serde::de::MapAccess::next_value::<Color>(&mut __map)?);
                         }
                         __Field::__field1 => {
-                            if serde::__private::Option::is_some(&__field1) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("comp"),
-                                );
+                            if Option::is_some(&__field1) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "comp",
+                                ));
                             }
-                            __field1 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Vec<Comp>>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field1 =
+                                Some(serde::de::MapAccess::next_value::<Vec<Comp>>(&mut __map)?);
                         }
                         __Field::__field2 => {
-                            if serde::__private::Option::is_some(&__field2) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("extrude"),
-                                );
+                            if Option::is_some(&__field2) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "extrude",
+                                ));
                             }
-                            __field2 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Extrude>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field2 =
+                                Some(serde::de::MapAccess::next_value::<Extrude>(&mut __map)?);
                         }
                         __Field::__field3 => {
-                            if serde::__private::Option::is_some(&__field3) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("offset"),
-                                );
+                            if Option::is_some(&__field3) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "offset",
+                                ));
                             }
-                            __field3 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Offset>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field3 =
+                                Some(serde::de::MapAccess::next_value::<Offset>(&mut __map)?);
                         }
                         __Field::__field4 => {
-                            if serde::__private::Option::is_some(&__field4) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field(
-                                        "setupProjection",
-                                    ),
-                                );
+                            if Option::is_some(&__field4) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "setupProjection",
+                                ));
                             }
-                            __field4 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<SetupProjection>,
-                            >(
-                                &mut __map
+                            __field4 = Some(serde::de::MapAccess::next_value::<SetupProjection>(
+                                &mut __map,
                             )?);
                         }
                         __Field::__field5 => {
-                            if serde::__private::Option::is_some(&__field5) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("size"),
-                                );
+                            if Option::is_some(&__field5) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "size",
+                                ));
                             }
-                            __field5 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Size>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field5 = Some(serde::de::MapAccess::next_value::<Size>(&mut __map)?);
                         }
                         __Field::__field6 => {
-                            if serde::__private::Option::is_some(&__field6) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("split"),
-                                );
+                            if Option::is_some(&__field6) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "split",
+                                ));
                             }
-                            __field6 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Split>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field6 = Some(serde::de::MapAccess::next_value::<Split>(&mut __map)?);
                         }
                         __Field::__field7 => {
-                            if serde::__private::Option::is_some(&__field7) {
-                                return serde::__private::Err(
-                                    <__A::Error as serde::de::Error>::duplicate_field("texture"),
-                                );
+                            if Option::is_some(&__field7) {
+                                return Err(<__A::Error as serde::de::Error>::duplicate_field(
+                                    "texture",
+                                ));
                             }
-                            __field7 = serde::__private::Some(serde::de::MapAccess::next_value::<
-                                Option<Texture>,
-                            >(
-                                &mut __map
-                            )?);
+                            __field7 =
+                                Some(serde::de::MapAccess::next_value::<Texture>(&mut __map)?);
                         }
                     }
                 }
-                let __field0 = match __field0 {
-                    serde::__private::Some(__field0) => __field0,
-                    serde::__private::None => serde::__private::de::missing_field("color")?,
-                };
-                let __field1 = match __field1 {
-                    serde::__private::Some(__field1) => __field1,
-                    serde::__private::None => serde::__private::de::missing_field("comp")?,
-                };
-                let __field2 = match __field2 {
-                    serde::__private::Some(__field2) => __field2,
-                    serde::__private::None => serde::__private::de::missing_field("extrude")?,
-                };
-                let __field3 = match __field3 {
-                    serde::__private::Some(__field3) => __field3,
-                    serde::__private::None => serde::__private::de::missing_field("offset")?,
-                };
-                let __field4 = match __field4 {
-                    serde::__private::Some(__field4) => __field4,
-                    serde::__private::None => {
-                        serde::__private::de::missing_field("setupProjection")?
-                    }
-                };
-                let __field5 = match __field5 {
-                    serde::__private::Some(__field5) => __field5,
-                    serde::__private::None => serde::__private::de::missing_field("size")?,
-                };
-                let __field6 = match __field6 {
-                    serde::__private::Some(__field6) => __field6,
-                    serde::__private::None => serde::__private::de::missing_field("split")?,
-                };
-                let __field7 = match __field7 {
-                    serde::__private::Some(__field7) => __field7,
-                    serde::__private::None => serde::__private::de::missing_field("texture")?,
-                };
 
                 if let Some(__field0) = __field0 {
-                    return serde::__private::Ok(Op::Color(__field0));
+                    return Ok(Op::Color(__field0));
                 }
                 if let Some(__field1) = __field1 {
-                    return serde::__private::Ok(Op::Comp(__field1));
+                    return Ok(Op::Comp(__field1));
                 }
                 if let Some(__field2) = __field2 {
-                    return serde::__private::Ok(Op::Extrude(__field2));
+                    return Ok(Op::Extrude(__field2));
                 }
                 if let Some(__field3) = __field3 {
-                    return serde::__private::Ok(Op::Offset(__field3));
+                    return Ok(Op::Offset(__field3));
                 }
                 if let Some(__field4) = __field4 {
-                    return serde::__private::Ok(Op::SetupProjection(__field4));
+                    return Ok(Op::SetupProjection(__field4));
                 }
                 if let Some(__field5) = __field5 {
-                    return serde::__private::Ok(Op::Size(__field5));
+                    return Ok(Op::Size(__field5));
                 }
                 if let Some(__field6) = __field6 {
-                    return serde::__private::Ok(Op::Split(__field6));
+                    return Ok(Op::Split(__field6));
                 }
                 if let Some(__field7) = __field7 {
-                    return serde::__private::Ok(Op::Texture(__field7));
+                    return Ok(Op::Texture(__field7));
                 }
                 todo!("TODO: Return `Err(?)`")
             }
@@ -307,15 +233,15 @@ impl<'de> serde::Deserialize<'de> for Op {
             "op",
             VARIANTS,
             __Visitor {
-                marker: serde::__private::PhantomData::<Op>,
-                lifetime: serde::__private::PhantomData,
+                marker: PhantomData::<Op>,
+                lifetime: PhantomData,
             },
         )
     }
 }
 
 impl serde::Serialize for Op {
-    fn serialize<__S>(&self, __serializer: __S) -> serde::__private::Result<__S::Ok, __S::Error>
+    fn serialize<__S>(&self, __serializer: __S) -> Result<__S::Ok, __S::Error>
     where
         __S: serde::Serializer,
     {
