@@ -1,3 +1,4 @@
+use crate::custom_formats;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -10,8 +11,22 @@ pub struct Main {
 #[serde(rename_all = "camelCase")]
 pub struct Grammars {
     version: String,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    exports: Vec<Export>,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    shapes: Vec<Shape>,
     grammar: Vec<Grammar>,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Export {}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Shape {}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -25,6 +40,10 @@ pub struct Grammar {
 pub struct Attr {
     name: String,
     value: String,
+    #[serde(with = "custom_formats::option_range")]
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    range: Option<std::ops::Range<f32>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -71,7 +90,7 @@ pub struct Center {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Copy {
-    // TODO: fill in fields
+    name: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -155,7 +174,25 @@ pub struct Taper {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Translate {
-    // TODO: fill in fields
+    coord_system: ECoordSystem,
+    mode: EMode,
+    x: SizeDir,
+    y: SizeDir,
+    z: SizeDir,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum EMode {
+    Absolute,
+    Relative,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+enum ECoordSystem {
+    World,
+    Object,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -282,31 +319,3 @@ pub struct Offset {
 //     // Expression(??),
 // }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use pretty_assertions::assert_eq;
-
-    #[test]
-    fn it_works() {
-        let input = include_str!("../tests/a.yaml");
-
-        let grammars: Main = serde_yaml::from_str(input).unwrap();
-        let output = serde_yaml::to_string(&grammars).unwrap(); //.replace("  ", "    ");
-
-        let output = format(&output);
-
-        assert_eq!(input, output);
-    }
-
-    fn format(input: &str) -> String {
-        use yaml_rust::{YamlEmitter, YamlLoader};
-        let docs = YamlLoader::load_from_str(input).unwrap();
-        let mut ouput = String::new();
-        {
-            let mut emitter = YamlEmitter::new(&mut ouput);
-            emitter.dump(&docs[0]).unwrap();
-        }
-        ouput.to_string()
-    }
-}

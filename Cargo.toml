@@ -11,4 +11,4 @@ wasm-encoder = { version = "0.221", features = ["component-model"] }
 wasmparser = "0.221"
 
 [dev-dependencies]
-pretty_assertions = "1.4.1"
+similar-asserts = "1.7.0"

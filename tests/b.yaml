@@ -1,0 +1,603 @@
+---
+grammars:
+  version: "1.0"
+  grammar:
+    - attr:
+        - name: depth
+          value: "7.95272636"
+          range: "4.000000,40.000000"
+        - name: height
+          value: "18.7053642"
+          range: "4.000000,40.000000"
+        - name: roof_height
+          value: "0.406891108"
+          range: "0.300000,1.500000"
+        - name: roof_overhang
+          value: "0.346042305"
+          range: "0.300000,1.500000"
+        - name: width
+          value: "15.07317114"
+          range: "4.000000,40.000000"
+      rule:
+        - name: Roof
+          op:
+            - offset:
+                distance: roof_overhang*0.8
+                inside: TopFaceOffset
+        - name: Start
+          op:
+            - translate:
+                coordSystem: world
+                mode: relative
+                x:
+                  value: "0"
+                  type: absolute
+                y:
+                  value: "0"
+                  type: absolute
+                z:
+                  value: "0"
+                  type: absolute
+            - size:
+                centered: true
+                x:
+                  value: width
+                  type: absolute
+                y:
+                  value: depth
+                  type: absolute
+                z:
+                  value: "0"
+                  type: absolute
+            - extrude:
+                height: height
+            - comp:
+                - name: bottom
+                  value: Base
+                - name: side
+                  value: Facade
+                - name: top
+                  value: Roof
+        - name: TopFaceOffset
+          op:
+            - extrude:
+                height: roof_height*0.2
+            - comp:
+                - name: bottom
+                  value: RoofLedge
+                - name: side
+                  value: RoofLedge
+                - name: top
+                  value: TopFaceOffsetTop
+        - name: TopFaceOffsetTop
+          op:
+            - offset:
+                distance: roof_overhang*0.2
+                inside: TopFaceOffsetTopOffset
+        - name: TopFaceOffsetTopOffset
+          op:
+            - extrude:
+                height: roof_height*0.8
+            - comp:
+                - name: bottom
+                  value: RoofLedge
+                - name: side
+                  value: RoofLedge
+                - name: top
+                  value: TopFaceOffsetTopOffsetTop
+        - name: TopFaceOffsetTopOffsetTop
+          op:
+            - offset:
+                distance: "-roof_overhang"
+                border: RoofLedge
+                inside: TopFaceOffsetTopOffsetTopInside
+        - name: TopFaceOffsetTopOffsetTopInside
+          op:
+            - extrude:
+                height: "-roof_height*0.5"
+            - comp:
+                - name: side
+                  value: RoofLedge
+                - name: top
+                  value: RoofTop
+    - attr:
+        - name: p00_GH
+          value: "0.317185193"
+          range: "0.000000,100.000000"
+        - name: p01_FH
+          value: "2.13179612"
+          range: "0.000000,100.000000"
+        - name: p02_AH
+          value: "0.0158432871"
+          range: "0.000000,100.000000"
+        - name: p03_SW
+          value: "0.417930305"
+          range: "0.000000,100.000000"
+        - name: p04_TW
+          value: "1.77921629"
+          range: "0.000000,100.000000"
+        - name: p05_GW
+          value: "7.11686516"
+          range: "0.000000,100.000000"
+        - name: p06_WT
+          value: "0.629350841"
+          range: "0.000000,100.000000"
+        - name: p07_WH
+          value: "0.970896244"
+          range: "0.000000,100.000000"
+        - name: p08_WB
+          value: "0.531549215"
+          range: "0.000000,100.000000"
+        - name: p09_WS
+          value: "0.450678736"
+          range: "0.000000,100.000000"
+        - name: p10_WW
+          value: "0.877858877"
+          range: "0.000000,100.000000"
+        - name: p11_DT
+          value: "0.0614476986"
+          range: "0.000000,100.000000"
+        - name: p12_DH
+          value: "0.212271914"
+          range: "0.000000,100.000000"
+        - name: p13_DB
+          value: "0.0434655994"
+          range: "0.000000,100.000000"
+        - name: p14_DS
+          value: "1.66682136"
+          range: "0.000000,100.000000"
+        - name: p15_DW
+          value: "3.7832222"
+          range: "0.000000,100.000000"
+      rule:
+        - name: Facade
+          op:
+            - setupProjection:
+                axes: scope.xy
+                width:
+                  value: "5"
+                  type: absolute
+                height:
+                  value: "5"
+                  type: absolute
+            - split:
+                axis: y
+                sizes:
+                  - value: p00_GH
+                    name: GroundFloorAndLedge
+                    type: floating
+                  - value: p01_FH
+                    name: Floor
+                    repeat: true
+                    type: floating
+                  - value: p02_AH
+                    name: Wall0
+                    type: floating
+        - name: Facade2
+          op:
+            - setupProjection:
+                axes: scope.xy
+                width:
+                  value: "5"
+                  type: absolute
+                height:
+                  value: "5"
+                  type: absolute
+            - split:
+                axis: y
+                sizes:
+                  - value: p01_FH
+                    name: Floor
+                    repeat: true
+                    type: floating
+                  - value: p02_AH
+                    name: Wall0
+                    type: floating
+        - name: Floor
+          op:
+            - split:
+                axis: x
+                sizes:
+                  - value: p03_SW
+                    name: Wall0
+                    type: floating
+                  - value: p04_TW
+                    name: Tile
+                    repeat: true
+                    type: floating
+                  - value: p03_SW
+                    name: Wall0
+                    type: floating
+        - name: GroundFloor
+          op:
+            - split:
+                axis: x
+                sizes:
+                  - value: p03_SW
+                    name: Wall1
+                    type: absolute
+                  - value: p05_GW
+                    name: GroundTile
+                    repeat: true
+                    type: floating
+                  - value: p03_SW
+                    name: Wall1
+                    type: absolute
+        - name: GroundFloorAndLedge
+          op:
+            - split:
+                axis: y
+                sizes:
+                  - value: "0.92"
+                    name: GroundFloor
+                    type: relative
+                  - value: "0.08"
+                    name: Ledge
+                    type: relative
+        - name: GroundTile
+          op:
+            - split:
+                axis: y
+                sizes:
+                  - value: p13_DB
+                    name: Wall1
+                    type: floating
+                  - value: p12_DH
+                    name: GroundTile2
+                    type: floating
+                  - value: p11_DT
+                    name: Wall1
+                    type: floating
+        - name: GroundTile2
+          op:
+            - split:
+                axis: x
+                sizes:
+                  - value: p14_DS
+                    name: Wall1
+                    type: floating
+                  - value: p15_DW
+                    name: Window1
+                    type: floating
+                  - value: p14_DS
+                    name: Wall1
+                    type: floating
+        - name: Ledge
+          op:
+            - split:
+                axis: y
+                sizes:
+                  - value: "0.5"
+                    name: LedgeLayer1
+                    type: relative
+                  - value: "0.3"
+                    name: LedgeLayer2
+                    type: relative
+                  - value: "0.2"
+                    name: LedgeLayer3
+                    type: relative
+        - name: LedgeLayer1
+          op:
+            - size:
+                centered: true
+                x:
+                  value: scope.sx+0.1*2
+                  type: absolute
+                y:
+                  value: "1"
+                  type: relative
+                z:
+                  value: "1"
+                  type: relative
+            - extrude:
+                height: "0.1"
+            - comp:
+                - name: side
+                  value: LedgeFace
+                - name: top
+                  value: LedgeFace
+        - name: LedgeLayer2
+          op:
+            - size:
+                centered: true
+                x:
+                  value: scope.sx+0.3*2
+                  type: absolute
+                y:
+                  value: "1"
+                  type: relative
+                z:
+                  value: "1"
+                  type: relative
+            - extrude:
+                height: "0.3"
+            - comp:
+                - name: side
+                  value: LedgeFace
+                - name: top
+                  value: LedgeFace
+        - name: LedgeLayer3
+          op:
+            - size:
+                centered: true
+                x:
+                  value: scope.sx+0.3*1.15*2
+                  type: absolute
+                y:
+                  value: "1"
+                  type: relative
+                z:
+                  value: "1"
+                  type: relative
+            - extrude:
+                height: 0.3*1.15
+            - comp:
+                - name: side
+                  value: LedgeFace
+                - name: top
+                  value: LedgeFace
+        - name: Tile
+          op:
+            - split:
+                axis: y
+                sizes:
+                  - value: p08_WB
+                    name: Wall0
+                    type: floating
+                  - value: p07_WH
+                    name: Tile2
+                    type: floating
+                  - value: p06_WT
+                    name: Wall0
+                    type: floating
+        - name: Tile2
+          op:
+            - split:
+                axis: x
+                sizes:
+                  - value: p09_WS
+                    name: Wall0
+                    type: floating
+                  - value: p10_WW
+                    name: Window0
+                    type: floating
+                  - value: p09_WS
+                    name: Wall0
+                    type: floating
+    - attr:
+        - name: offset_size
+          value: "0.02"
+          range: "0.020000,0.020000"
+      rule:
+        - name: Window0
+          op:
+            - extrude:
+                height: "-0.05"
+            - comp:
+                - name: side
+                  value: WindowFrame
+                - name: top
+                  value: WindowTileMainTop_01
+        - name: WindowGlassArea01
+          op:
+            - setupProjection:
+                axes: scope.xy
+                width:
+                  value: "1"
+                  type: relative
+                height:
+                  value: "1"
+                  type: relative
+            - copy:
+                name: WindowGlass
+        - name: WindowTileMainTopInside_01
+          op:
+            - extrude:
+                height: "-0.05"
+            - comp:
+                - name: side
+                  value: WindowFrame
+                - name: top
+                  value: WindowGlassArea01
+        - name: WindowTileMainTop_01
+          op:
+            - offset:
+                distance: "-offset_size"
+                border: WindowFrame
+                inside: WindowTileMainTopInside_01
+    - attr:
+        - name: offset_size
+          value: "0.02"
+          range: "0.020000,0.020000"
+      rule:
+        - name: Window1
+          op:
+            - extrude:
+                height: "-0.05"
+            - comp:
+                - name: side
+                  value: WindowFrame
+                - name: top
+                  value: WindowTileMainTop_01
+        - name: WindowGlassArea01
+          op:
+            - setupProjection:
+                axes: scope.xy
+                width:
+                  value: "1"
+                  type: relative
+                height:
+                  value: "1"
+                  type: relative
+            - copy:
+                name: WindowGlass
+        - name: WindowTileMainTopInside_01
+          op:
+            - extrude:
+                height: "-0.05"
+            - comp:
+                - name: side
+                  value: WindowFrame
+                - name: top
+                  value: WindowGlassArea01
+        - name: WindowTileMainTop_01
+          op:
+            - offset:
+                distance: "-offset_size"
+                border: WindowFrame
+                inside: WindowTileMainTopInside_01
+    - attr:
+        - name: window_side_offset_09
+          value: "0.1"
+          range: "0.100000,0.100000"
+        - name: window_top_offset_09
+          value: "0.1"
+          range: "0.100000,0.100000"
+      rule:
+        - name: Door
+          op:
+            - extrude:
+                height: "-0.2"
+            - comp:
+                - name: side
+                  value: Wall
+                - name: top
+                  value: EntranceTop
+        - name: EntranceTop
+          op:
+            - split:
+                axis: y
+                sizes:
+                  - value: 1-window_top_offset_09
+                    name: EntranceTopMain
+                    type: relative
+                  - value: window_top_offset_09
+                    name: Wall
+                    type: relative
+        - name: EntranceTopMain
+          op:
+            - split:
+                axis: x
+                sizes:
+                  - value: window_side_offset_09
+                    name: Wall
+                    type: relative
+                  - value: 1-window_side_offset_09*2
+                    name: EntranceTopMainMain
+                    type: relative
+                  - value: window_side_offset_09
+                    name: Wall
+                    type: relative
+        - name: EntranceTopMainMain
+          op:
+            - extrude:
+                height: "-0.6"
+            - comp:
+                - name: side
+                  value: Wall
+                - name: top
+                  value: DoorGlass
+    - attr:
+        - name: facade_color
+          value: "#a3875e"
+        - name: facade_color0
+          value: "#a3875e"
+        - name: facade_color1
+          value: "#373226"
+        - name: facade_color2
+          value: "#8c7a74"
+        - name: facade_color3
+          value: "#60635e"
+        - name: facade_color4
+          value: "#bbeaff"
+        - name: facade_color5
+          value: "#f3c89d"
+        - name: facade_color6
+          value: "#282425"
+        - name: facade_color7
+          value: "#f0cda8"
+        - name: facade_color8
+          value: "#808080"
+        - name: facade_color9
+          value: "#808080"
+      rule:
+        - name: DoorGlass
+          op:
+            - color:
+                s: "#202020"
+        - name: LedgeFace
+          op:
+            - color:
+                s: facade_color
+        - name: RoofLedge
+          op:
+            - color:
+                s: facade_color
+        - name: RoofTop
+          op:
+            - setupProjection:
+                axes: scope.xy
+                width:
+                  value: "1"
+                  type: relative
+                height:
+                  value: "1"
+                  type: relative
+            - texture:
+                path: material/bldg2/roof.tif
+        - name: Wall
+          op:
+            - color:
+                s: facade_color
+        - name: Wall0
+          op:
+            - color:
+                s: facade_color0
+        - name: Wall1
+          op:
+            - color:
+                s: facade_color1
+        - name: Wall2
+          op:
+            - color:
+                s: facade_color2
+        - name: Wall3
+          op:
+            - color:
+                s: facade_color3
+        - name: Wall4
+          op:
+            - color:
+                s: facade_color4
+        - name: Wall5
+          op:
+            - color:
+                s: facade_color5
+        - name: Wall6
+          op:
+            - color:
+                s: facade_color6
+        - name: Wall7
+          op:
+            - color:
+                s: facade_color7
+        - name: Wall8
+          op:
+            - color:
+                s: facade_color8
+        - name: Wall9
+          op:
+            - color:
+                s: facade_color9
+        - name: WindowFrame
+          op:
+            - color:
+                s: "#f0e8e5"
+        - name: WindowGlass
+          op:
+            - texture:
+                path: material/bldg2/window_glass.png
+        - name: WindowSill
+          op:
+            - color:
+                s: facade_color
