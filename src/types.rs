@@ -2,12 +2,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Main {
     grammars: Grammars,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Grammars {
     version: String,
     #[serde(default)]
@@ -22,6 +24,7 @@ pub struct Grammars {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Export {
     name: String,
     r#type: String,
@@ -32,6 +35,7 @@ pub struct Export {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct ExportParam {
     name: String,
     r#type: EType,
@@ -56,6 +60,7 @@ pub enum Shape {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Polygon {
     rule: String,
     #[serde(default)]
@@ -73,6 +78,7 @@ pub struct Polygon {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Rectangle {
     width: u32,
     height: u32,
@@ -85,6 +91,7 @@ pub struct Rectangle {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 struct Skeleton {
     offset: i32,
     indices: Vec<(i32, i32)>,
@@ -92,6 +99,7 @@ struct Skeleton {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Grammar {
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -102,6 +110,7 @@ pub struct Grammar {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Attr {
     name: String,
     value: String,
@@ -112,6 +121,7 @@ pub struct Attr {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Rule {
     name: String,
     #[serde(with = "serde_yaml::with::singleton_map_recursive")]
@@ -149,96 +159,112 @@ pub enum Op {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Center {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Copy {
     name: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct CornerCut {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Hemisphere {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct InnerArch {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct InnerCircle {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct InnerSemiCircle {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Insert {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Pyramid {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct RoofGable {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct RoofHip {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Rotate {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct ShapeL {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct ShapeU {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Taper {
     // TODO: fill in fields
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Translate {
     coord_system: ECoordSystem,
     mode: EMode,
@@ -249,6 +275,7 @@ pub struct Translate {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub enum EMode {
     Absolute,
     Relative,
@@ -256,6 +283,7 @@ pub enum EMode {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 enum ECoordSystem {
     World,
     Object,
@@ -263,12 +291,14 @@ enum ECoordSystem {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Color {
     s: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Split {
     axis: EAxis,
     sizes: Vec<SizeDir>,
@@ -276,12 +306,14 @@ pub struct Split {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Texture {
     path: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct SetupProjection {
     axes: EAxes,
     width: SizeDir,
@@ -291,6 +323,7 @@ pub struct SetupProjection {
 }
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Size {
     centered: bool,
     x: SizeDir,
@@ -300,6 +333,7 @@ pub struct Size {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct SizeDir {
     value: String,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -311,6 +345,7 @@ pub struct SizeDir {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub enum EAxis {
     X,
     Y,
@@ -319,6 +354,7 @@ pub enum EAxis {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub enum EAxes {
     #[serde(rename = "scope.xy")]
     ScopeXY,
@@ -337,6 +373,7 @@ pub enum EAxes {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub enum SizeType {
     Absolute,
     Relative,
@@ -347,12 +384,14 @@ pub enum SizeType {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Extrude {
     height: String, // TODO: should not be string
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Comp {
     name: CompName,
     value: String, // TODO: should not be string
@@ -360,6 +399,7 @@ pub struct Comp {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub enum CompName {
     Front,
     Right,
@@ -372,6 +412,7 @@ pub enum CompName {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct Offset {
     distance: String, // TODO: should not be string
     #[serde(skip_serializing_if = "Option::is_none")]
