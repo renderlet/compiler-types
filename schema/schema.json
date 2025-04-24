@@ -1,0 +1,963 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Main",
+  "type": "object",
+  "required": [
+    "grammars"
+  ],
+  "properties": {
+    "grammars": {
+      "$ref": "#/definitions/Grammars"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Attr": {
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "range": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Range_of_float"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Center": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Color": {
+      "type": "object",
+      "required": [
+        "s"
+      ],
+      "properties": {
+        "s": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Comp": {
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/CompName"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompName": {
+      "type": "string",
+      "enum": [
+        "front",
+        "right",
+        "left",
+        "back",
+        "side",
+        "top",
+        "bottom"
+      ]
+    },
+    "Copy": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CornerCut": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "EAxes": {
+      "type": "string",
+      "enum": [
+        "scope.xy",
+        "scopeXZ",
+        "scopeYX",
+        "scopeYZ",
+        "scopeZX",
+        "scopeZY",
+        "worldXY",
+        "worldXZ",
+        "worldYX",
+        "worldYZ",
+        "worldZX",
+        "worldZY"
+      ]
+    },
+    "EAxis": {
+      "type": "string",
+      "enum": [
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "ECoordSystem": {
+      "type": "string",
+      "enum": [
+        "world",
+        "object"
+      ]
+    },
+    "EMode": {
+      "type": "string",
+      "enum": [
+        "absolute",
+        "relative"
+      ]
+    },
+    "EType": {
+      "type": "string",
+      "enum": [
+        "f32",
+        "f64",
+        "i32",
+        "i64",
+        "c32"
+      ]
+    },
+    "Export": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportParam"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExportParam": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/EType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Extrude": {
+      "type": "object",
+      "required": [
+        "height"
+      ],
+      "properties": {
+        "height": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Grammar": {
+      "type": "object",
+      "required": [
+        "attr",
+        "rule"
+      ],
+      "properties": {
+        "attr": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attr"
+          }
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Grammars": {
+      "type": "object",
+      "required": [
+        "grammar",
+        "version"
+      ],
+      "properties": {
+        "exports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Export"
+          }
+        },
+        "grammar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Grammar"
+          }
+        },
+        "shapes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Shape"
+          }
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Hemisphere": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InnerArch": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InnerCircle": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InnerSemiCircle": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Insert": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Offset": {
+      "type": "object",
+      "required": [
+        "distance",
+        "inside"
+      ],
+      "properties": {
+        "border": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "distance": {
+          "type": "string"
+        },
+        "inside": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Op": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "center"
+          ],
+          "properties": {
+            "center": {
+              "$ref": "#/definitions/Center"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "color"
+          ],
+          "properties": {
+            "color": {
+              "$ref": "#/definitions/Color"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "comp"
+          ],
+          "properties": {
+            "comp": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comp"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "copy"
+          ],
+          "properties": {
+            "copy": {
+              "$ref": "#/definitions/Copy"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "cornerCut"
+          ],
+          "properties": {
+            "cornerCut": {
+              "$ref": "#/definitions/CornerCut"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "extrude"
+          ],
+          "properties": {
+            "extrude": {
+              "$ref": "#/definitions/Extrude"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "hemisphere"
+          ],
+          "properties": {
+            "hemisphere": {
+              "$ref": "#/definitions/Hemisphere"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "innerArch"
+          ],
+          "properties": {
+            "innerArch": {
+              "$ref": "#/definitions/InnerArch"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "innerCircle"
+          ],
+          "properties": {
+            "innerCircle": {
+              "$ref": "#/definitions/InnerCircle"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "innerSemiCircle"
+          ],
+          "properties": {
+            "innerSemiCircle": {
+              "$ref": "#/definitions/InnerSemiCircle"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "insert"
+          ],
+          "properties": {
+            "insert": {
+              "$ref": "#/definitions/Insert"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "offset"
+          ],
+          "properties": {
+            "offset": {
+              "$ref": "#/definitions/Offset"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "pyramid"
+          ],
+          "properties": {
+            "pyramid": {
+              "$ref": "#/definitions/Pyramid"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "roofGable"
+          ],
+          "properties": {
+            "roofGable": {
+              "$ref": "#/definitions/RoofGable"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "roofHip"
+          ],
+          "properties": {
+            "roofHip": {
+              "$ref": "#/definitions/RoofHip"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "rotate"
+          ],
+          "properties": {
+            "rotate": {
+              "$ref": "#/definitions/Rotate"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "setupProjection"
+          ],
+          "properties": {
+            "setupProjection": {
+              "$ref": "#/definitions/SetupProjection"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "shapeL"
+          ],
+          "properties": {
+            "shapeL": {
+              "$ref": "#/definitions/ShapeL"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "shapeU"
+          ],
+          "properties": {
+            "shapeU": {
+              "$ref": "#/definitions/ShapeU"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "size"
+          ],
+          "properties": {
+            "size": {
+              "$ref": "#/definitions/Size"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "split"
+          ],
+          "properties": {
+            "split": {
+              "$ref": "#/definitions/Split"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "taper"
+          ],
+          "properties": {
+            "taper": {
+              "$ref": "#/definitions/Taper"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "texture"
+          ],
+          "properties": {
+            "texture": {
+              "$ref": "#/definitions/Texture"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "translate"
+          ],
+          "properties": {
+            "translate": {
+              "$ref": "#/definitions/Translate"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Polygon": {
+      "type": "object",
+      "required": [
+        "points",
+        "rule"
+      ],
+      "properties": {
+        "ele": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        },
+        "height": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "float"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "number",
+                "format": "float"
+              }
+            ],
+            "maxItems": 2,
+            "minItems": 2
+          }
+        },
+        "rule": {
+          "type": "string"
+        },
+        "skeleton": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Skeleton"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Pyramid": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Range_of_float": {
+      "type": "object",
+      "required": [
+        "end",
+        "start"
+      ],
+      "properties": {
+        "end": {
+          "type": "number",
+          "format": "float"
+        },
+        "start": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "Rectangle": {
+      "type": "object",
+      "required": [
+        "height",
+        "rule",
+        "width"
+      ],
+      "properties": {
+        "height": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "position": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": [
+            {
+              "type": "number",
+              "format": "float"
+            },
+            {
+              "type": "number",
+              "format": "float"
+            },
+            {
+              "type": "number",
+              "format": "float"
+            }
+          ],
+          "maxItems": 3,
+          "minItems": 3
+        },
+        "rule": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "RoofGable": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "RoofHip": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Rotate": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Rule": {
+      "type": "object",
+      "required": [
+        "name",
+        "op"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "op": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Op"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SetupProjection": {
+      "type": "object",
+      "required": [
+        "axes",
+        "height",
+        "width"
+      ],
+      "properties": {
+        "axes": {
+          "$ref": "#/definitions/EAxes"
+        },
+        "height": {
+          "$ref": "#/definitions/SizeDir"
+        },
+        "width": {
+          "$ref": "#/definitions/SizeDir"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Shape": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "polygon"
+          ],
+          "properties": {
+            "polygon": {
+              "$ref": "#/definitions/Polygon"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "rectangle"
+          ],
+          "properties": {
+            "rectangle": {
+              "$ref": "#/definitions/Rectangle"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ShapeL": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ShapeU": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Size": {
+      "type": "object",
+      "required": [
+        "centered",
+        "x",
+        "y",
+        "z"
+      ],
+      "properties": {
+        "centered": {
+          "type": "boolean"
+        },
+        "x": {
+          "$ref": "#/definitions/SizeDir"
+        },
+        "y": {
+          "$ref": "#/definitions/SizeDir"
+        },
+        "z": {
+          "$ref": "#/definitions/SizeDir"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SizeDir": {
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repeat": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "type": {
+          "$ref": "#/definitions/SizeType"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SizeType": {
+      "type": "string",
+      "enum": [
+        "absolute",
+        "relative",
+        "floating",
+        "repeat",
+        "repeatRelative"
+      ]
+    },
+    "Skeleton": {
+      "type": "object",
+      "required": [
+        "indices",
+        "offset"
+      ],
+      "properties": {
+        "indices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "integer",
+                "format": "int32"
+              }
+            ],
+            "maxItems": 2,
+            "minItems": 2
+          }
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Split": {
+      "type": "object",
+      "required": [
+        "axis",
+        "sizes"
+      ],
+      "properties": {
+        "axis": {
+          "$ref": "#/definitions/EAxis"
+        },
+        "sizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SizeDir"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Taper": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Texture": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Translate": {
+      "type": "object",
+      "required": [
+        "coordSystem",
+        "mode",
+        "x",
+        "y",
+        "z"
+      ],
+      "properties": {
+        "coordSystem": {
+          "$ref": "#/definitions/ECoordSystem"
+        },
+        "mode": {
+          "$ref": "#/definitions/EMode"
+        },
+        "x": {
+          "$ref": "#/definitions/SizeDir"
+        },
+        "y": {
+          "$ref": "#/definitions/SizeDir"
+        },
+        "z": {
+          "$ref": "#/definitions/SizeDir"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
