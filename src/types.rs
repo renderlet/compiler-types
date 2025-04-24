@@ -1,4 +1,3 @@
-use crate::custom_formats;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -16,21 +15,87 @@ pub struct Grammars {
     exports: Vec<Export>,
     #[serde(default)]
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(with = "serde_yaml::with::singleton_map_recursive")]
     shapes: Vec<Shape>,
     grammar: Vec<Grammar>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Export {}
+pub struct Export {
+    name: String,
+    r#type: String,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    params: Vec<ExportParam>,
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Shape {}
+pub struct ExportParam {
+    name: String,
+    r#type: EType,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum EType {
+    F32,
+    F64,
+    I32,
+    I64,
+    C32,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum Shape {
+    Polygon(Polygon),
+    Rectangle(Rectangle),
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Polygon {
+    rule: String,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    height: Option<f32>,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    ele: Option<f32>,
+    // points: Vec<glam::Vec2>,
+    points: Vec<(f32, f32)>,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    skeleton: Option<Skeleton>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Rectangle {
+    width: u32,
+    height: u32,
+    rule: String,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    // position: Option<glam::Vec3>,
+    position: Option<(f32, f32, f32)>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct Skeleton {
+    offset: i32,
+    indices: Vec<(i32, i32)>,
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Grammar {
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    name: Option<String>,
     attr: Vec<Attr>,
     rule: Vec<Rule>,
 }
@@ -40,7 +105,6 @@ pub struct Grammar {
 pub struct Attr {
     name: String,
     value: String,
-    #[serde(with = "custom_formats::option_range")]
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     range: Option<std::ops::Range<f32>>,
@@ -50,10 +114,12 @@ pub struct Attr {
 #[serde(rename_all = "camelCase")]
 pub struct Rule {
     name: String,
+    #[serde(with = "serde_yaml::with::singleton_map_recursive")]
     op: Vec<Op>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub enum Op {
     Center(Center),
     Color(Color),

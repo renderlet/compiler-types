@@ -5,19 +5,26 @@ grammars:
     - attr:
         - name: depth
           value: "7.95272636"
-          range: "4.000000,40.000000"
         - name: height
           value: "18.7053642"
-          range: "4.000000,40.000000"
+          range:
+            start: 4.0
+            end: 40.0
         - name: roof_height
           value: "0.406891108"
-          range: "0.300000,1.500000"
+          range:
+            start: 0.3
+            end: 1.5
         - name: roof_overhang
           value: "0.346042305"
-          range: "0.300000,1.500000"
+          range:
+            start: 0.3
+            end: 1.5
         - name: width
           value: "15.07317114"
-          range: "4.000000,40.000000"
+          range:
+            start: 4.0
+            end: 40.0
       rule:
         - name: Roof
           op:
@@ -103,52 +110,84 @@ grammars:
     - attr:
         - name: p00_GH
           value: "0.317185193"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p01_FH
           value: "2.13179612"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p02_AH
           value: "0.0158432871"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p03_SW
           value: "0.417930305"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p04_TW
           value: "1.77921629"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p05_GW
           value: "7.11686516"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p06_WT
           value: "0.629350841"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p07_WH
           value: "0.970896244"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p08_WB
           value: "0.531549215"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p09_WS
           value: "0.450678736"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p10_WW
           value: "0.877858877"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p11_DT
           value: "0.0614476986"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p12_DH
           value: "0.212271914"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p13_DB
           value: "0.0434655994"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p14_DS
           value: "1.66682136"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
         - name: p15_DW
           value: "3.7832222"
-          range: "0.000000,100.000000"
+          range:
+            start: 0.0
+            end: 100.0
       rule:
         - name: Facade
           op:
@@ -367,7 +406,9 @@ grammars:
     - attr:
         - name: offset_size
           value: "0.02"
-          range: "0.020000,0.020000"
+          range:
+            start: 0.02
+            end: 0.02
       rule:
         - name: Window0
           op:
@@ -408,7 +449,9 @@ grammars:
     - attr:
         - name: offset_size
           value: "0.02"
-          range: "0.020000,0.020000"
+          range:
+            start: 0.02
+            end: 0.02
       rule:
         - name: Window1
           op:
@@ -449,10 +492,14 @@ grammars:
     - attr:
         - name: window_side_offset_09
           value: "0.1"
-          range: "0.100000,0.100000"
+          range:
+            start: 0.1
+            end: 0.1
         - name: window_top_offset_09
           value: "0.1"
-          range: "0.100000,0.100000"
+          range:
+            start: 0.1
+            end: 0.1
       rule:
         - name: Door
           op:

@@ -18,7 +18,6 @@ fn test(path: &str) {
     let input = std::fs::read_to_string(path).unwrap();
 
     let grammars: Main = serde_yaml::from_str(&input).unwrap();
-    println!("{grammars:#?}");
     let output = serde_yaml::to_string(&grammars).unwrap();
 
     let output = format(&output);
@@ -34,4 +33,9 @@ fn a() {
 #[test]
 fn b() {
     test("b");
+}
+
+#[test]
+fn c() {
+    test("c");
 }
