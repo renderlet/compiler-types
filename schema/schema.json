@@ -1,37 +1,48 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Main",
   "type": "object",
-  "required": [
-    "grammars"
-  ],
   "properties": {
     "grammars": {
-      "$ref": "#/definitions/Grammars"
+      "$ref": "#/$defs/Grammars"
     }
   },
   "additionalProperties": false,
-  "definitions": {
+  "required": [
+    "grammars"
+  ],
+  "$defs": {
     "Attr": {
       "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "range": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Range_of_double"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "value"
-          ],
           "properties": {
             "value": {
               "type": "string"
             }
           },
-          "additionalProperties": false
+          "required": [
+            "value"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "values"
-          ],
           "properties": {
             "values": {
               "type": "array",
@@ -40,68 +51,55 @@
               }
             }
           },
-          "additionalProperties": false
+          "required": [
+            "values"
+          ]
         }
       ],
       "required": [
         "name"
       ],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "range": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/Range_of_double"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "additionalProperties": false
+      "unevaluatedProperties": false
     },
     "Center": {
       "type": "object",
-      "required": [
-        "axesSelector"
-      ],
       "properties": {
         "axesSelector": {
-          "$ref": "#/definitions/EAxesSelector"
+          "$ref": "#/$defs/EAxesSelector"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "axesSelector"
+      ]
     },
     "Color": {
       "type": "object",
-      "required": [
-        "s"
-      ],
       "properties": {
         "s": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "s"
+      ]
     },
     "Comp": {
       "type": "object",
-      "required": [
-        "name",
-        "value"
-      ],
       "properties": {
         "name": {
-          "$ref": "#/definitions/CompName"
+          "$ref": "#/$defs/CompName"
         },
         "value": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "CompName": {
       "type": "string",
@@ -117,30 +115,30 @@
     },
     "Copy": {
       "type": "object",
-      "required": [
-        "name"
-      ],
       "properties": {
         "name": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
     },
     "CornerCut": {
       "type": "object",
-      "required": [
-        "length"
-      ],
       "properties": {
+        "type": {
+          "$ref": "#/$defs/ECornerCut"
+        },
         "length": {
           "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/ECornerCut"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "length"
+      ]
     },
     "EAxes": {
       "type": "string",
@@ -213,65 +211,61 @@
     },
     "Export": {
       "type": "object",
-      "required": [
-        "name",
-        "type"
-      ],
       "properties": {
+        "type": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
         "params": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportParam"
+            "$ref": "#/$defs/ExportParam"
           }
-        },
-        "type": {
-          "type": "string"
         }
       },
-      "additionalProperties": false
-    },
-    "ExportParam": {
-      "type": "object",
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
-      ],
+      ]
+    },
+    "ExportParam": {
+      "type": "object",
       "properties": {
+        "type": {
+          "$ref": "#/$defs/EType"
+        },
         "name": {
           "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/EType"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type"
+      ]
     },
     "Extrude": {
       "type": "object",
-      "required": [
-        "height"
-      ],
       "properties": {
         "height": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "height"
+      ]
     },
     "Grammar": {
       "type": "object",
-      "required": [
-        "attr",
-        "rule"
-      ],
       "properties": {
         "attr": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Attr"
+            "$ref": "#/$defs/Attr"
           }
         },
         "name": {
@@ -283,57 +277,61 @@
         "rule": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Rule"
+            "$ref": "#/$defs/Rule"
           }
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "attr",
+        "rule"
+      ]
     },
     "Grammars": {
       "type": "object",
-      "required": [
-        "grammar",
-        "version"
-      ],
       "properties": {
         "exports": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Export"
+            "$ref": "#/$defs/Export"
           }
         },
         "grammar": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Grammar"
+            "$ref": "#/$defs/Grammar"
           }
         },
         "shapes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Shape"
+            "$ref": "#/$defs/Shape"
           }
         },
         "version": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "grammar"
+      ]
     },
     "Hemisphere": {
       "type": "null"
     },
     "Hip": {
       "type": "object",
-      "required": [
-        "angle"
-      ],
       "properties": {
         "angle": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "angle"
+      ]
     },
     "InnerArch": {
       "type": "object",
@@ -347,22 +345,18 @@
     },
     "Insert": {
       "type": "object",
-      "required": [
-        "geometryPath"
-      ],
       "properties": {
         "geometryPath": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "geometryPath"
+      ]
     },
     "Offset": {
       "type": "object",
-      "required": [
-        "distance",
-        "inside"
-      ],
       "properties": {
         "border": {
           "type": [
@@ -377,321 +371,321 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "distance",
+        "inside"
+      ]
     },
     "Op": {
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "center"
-          ],
           "properties": {
             "center": {
-              "$ref": "#/definitions/Center"
+              "$ref": "#/$defs/Center"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "center"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "color"
-          ],
           "properties": {
             "color": {
-              "$ref": "#/definitions/Color"
+              "$ref": "#/$defs/Color"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "color"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "comp"
-          ],
           "properties": {
             "comp": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Comp"
+                "$ref": "#/$defs/Comp"
               }
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "comp"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "copy"
-          ],
           "properties": {
             "copy": {
-              "$ref": "#/definitions/Copy"
+              "$ref": "#/$defs/Copy"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "copy"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "cornerCut"
-          ],
           "properties": {
             "cornerCut": {
-              "$ref": "#/definitions/CornerCut"
+              "$ref": "#/$defs/CornerCut"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "cornerCut"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "extrude"
-          ],
           "properties": {
             "extrude": {
-              "$ref": "#/definitions/Extrude"
+              "$ref": "#/$defs/Extrude"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "extrude"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "hemisphere"
-          ],
           "properties": {
             "hemisphere": {
-              "$ref": "#/definitions/Hemisphere"
+              "$ref": "#/$defs/Hemisphere"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "hemisphere"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "hip"
-          ],
           "properties": {
             "hip": {
-              "$ref": "#/definitions/Hip"
+              "$ref": "#/$defs/Hip"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "hip"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "innerArch"
-          ],
           "properties": {
             "innerArch": {
-              "$ref": "#/definitions/InnerArch"
+              "$ref": "#/$defs/InnerArch"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "innerArch"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "innerCircle"
-          ],
           "properties": {
             "innerCircle": {
-              "$ref": "#/definitions/InnerCircle"
+              "$ref": "#/$defs/InnerCircle"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "innerCircle"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "innerSemiCircle"
-          ],
           "properties": {
             "innerSemiCircle": {
-              "$ref": "#/definitions/InnerSemiCircle"
+              "$ref": "#/$defs/InnerSemiCircle"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "innerSemiCircle"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "insert"
-          ],
           "properties": {
             "insert": {
-              "$ref": "#/definitions/Insert"
+              "$ref": "#/$defs/Insert"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "insert"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "offset"
-          ],
           "properties": {
             "offset": {
-              "$ref": "#/definitions/Offset"
+              "$ref": "#/$defs/Offset"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "offset"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "pyramid"
-          ],
           "properties": {
             "pyramid": {
-              "$ref": "#/definitions/Pyramid"
+              "$ref": "#/$defs/Pyramid"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "pyramid"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "roofGable"
-          ],
           "properties": {
             "roofGable": {
-              "$ref": "#/definitions/RoofGable"
+              "$ref": "#/$defs/RoofGable"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "roofGable"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "roofHip"
-          ],
           "properties": {
             "roofHip": {
-              "$ref": "#/definitions/RoofHip"
+              "$ref": "#/$defs/RoofHip"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "roofHip"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "rotate"
-          ],
           "properties": {
             "rotate": {
-              "$ref": "#/definitions/Rotate"
+              "$ref": "#/$defs/Rotate"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "rotate"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "setupProjection"
-          ],
           "properties": {
             "setupProjection": {
-              "$ref": "#/definitions/SetupProjection"
+              "$ref": "#/$defs/SetupProjection"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "setupProjection"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "shapeL"
-          ],
           "properties": {
             "shapeL": {
-              "$ref": "#/definitions/ShapeL"
+              "$ref": "#/$defs/ShapeL"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "shapeL"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "shapeU"
-          ],
           "properties": {
             "shapeU": {
-              "$ref": "#/definitions/ShapeU"
+              "$ref": "#/$defs/ShapeU"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "shapeU"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "size"
-          ],
           "properties": {
             "size": {
-              "$ref": "#/definitions/Size"
+              "$ref": "#/$defs/Size"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "size"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "split"
-          ],
           "properties": {
             "split": {
-              "$ref": "#/definitions/Split"
+              "$ref": "#/$defs/Split"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "split"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "taper"
-          ],
           "properties": {
             "taper": {
-              "$ref": "#/definitions/Taper"
+              "$ref": "#/$defs/Taper"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "taper"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "texture"
-          ],
           "properties": {
             "texture": {
-              "$ref": "#/definitions/Texture"
+              "$ref": "#/$defs/Texture"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "texture"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "translate"
-          ],
           "properties": {
             "translate": {
-              "$ref": "#/definitions/Translate"
+              "$ref": "#/$defs/Translate"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "translate"
+          ]
         }
       ]
     },
     "Polygon": {
       "type": "object",
-      "required": [
-        "points",
-        "rule"
-      ],
       "properties": {
         "ele": {
           "type": [
@@ -711,7 +705,9 @@
           "type": "array",
           "items": {
             "type": "array",
-            "items": [
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
               {
                 "type": "number",
                 "format": "double"
@@ -720,9 +716,7 @@
                 "type": "number",
                 "format": "double"
               }
-            ],
-            "maxItems": 2,
-            "minItems": 2
+            ]
           }
         },
         "rule": {
@@ -731,7 +725,7 @@
         "skeleton": {
           "anyOf": [
             {
-              "$ref": "#/definitions/Skeleton"
+              "$ref": "#/$defs/Skeleton"
             },
             {
               "type": "null"
@@ -739,26 +733,26 @@
           ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "rule",
+        "points"
+      ]
     },
     "Pyramid": {
       "type": "object",
-      "required": [
-        "height"
-      ],
       "properties": {
         "height": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "height"
+      ]
     },
     "Range_of_double": {
       "type": "object",
-      "required": [
-        "end",
-        "start"
-      ],
       "properties": {
         "end": {
           "type": "number",
@@ -768,27 +762,28 @@
           "type": "number",
           "format": "double"
         }
-      }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
     },
     "Rectangle": {
       "type": "object",
-      "required": [
-        "height",
-        "rule",
-        "width"
-      ],
       "properties": {
         "height": {
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "minimum": 0
         },
         "position": {
           "type": [
             "array",
             "null"
           ],
-          "items": [
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
             {
               "type": "number",
               "format": "double"
@@ -801,9 +796,7 @@
               "type": "number",
               "format": "double"
             }
-          ],
-          "maxItems": 3,
-          "minItems": 3
+          ]
         },
         "rule": {
           "type": "string"
@@ -811,34 +804,39 @@
         "width": {
           "type": "integer",
           "format": "uint32",
-          "minimum": 0.0
+          "minimum": 0
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height",
+        "rule"
+      ]
     },
     "RoofGable": {
       "type": "object",
-      "required": [
-        "angle"
-      ],
       "properties": {
         "angle": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "angle"
+      ]
     },
     "RoofHip": {
       "type": "object",
-      "required": [
-        "angle"
-      ],
       "properties": {
         "angle": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "angle"
+      ]
     },
     "Rotate": {
       "type": "object",
@@ -860,10 +858,6 @@
     },
     "Rule": {
       "type": "object",
-      "required": [
-        "name",
-        "op"
-      ],
       "properties": {
         "name": {
           "type": "string"
@@ -871,57 +865,61 @@
         "op": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Op"
+            "$ref": "#/$defs/Op"
           }
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "op"
+      ]
     },
     "SetupProjection": {
       "type": "object",
-      "required": [
-        "axes",
-        "height",
-        "width"
-      ],
       "properties": {
         "axes": {
-          "$ref": "#/definitions/EAxes"
+          "$ref": "#/$defs/EAxes"
         },
         "height": {
-          "$ref": "#/definitions/SizeDir"
+          "$ref": "#/$defs/SizeDir"
         },
         "width": {
-          "$ref": "#/definitions/SizeDir"
+          "$ref": "#/$defs/SizeDir"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "axes",
+        "width",
+        "height"
+      ]
     },
     "Shape": {
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "polygon"
-          ],
           "properties": {
             "polygon": {
-              "$ref": "#/definitions/Polygon"
+              "$ref": "#/$defs/Polygon"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "polygon"
+          ]
         },
         {
           "type": "object",
-          "required": [
-            "rectangle"
-          ],
           "properties": {
             "rectangle": {
-              "$ref": "#/definitions/Rectangle"
+              "$ref": "#/$defs/Rectangle"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "required": [
+            "rectangle"
+          ]
         }
       ]
     },
@@ -935,35 +933,34 @@
     },
     "Size": {
       "type": "object",
-      "required": [
-        "centered",
-        "x",
-        "y",
-        "z"
-      ],
       "properties": {
         "centered": {
           "type": "boolean"
         },
         "x": {
-          "$ref": "#/definitions/SizeDir"
+          "$ref": "#/$defs/SizeDir"
         },
         "y": {
-          "$ref": "#/definitions/SizeDir"
+          "$ref": "#/$defs/SizeDir"
         },
         "z": {
-          "$ref": "#/definitions/SizeDir"
+          "$ref": "#/$defs/SizeDir"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "centered",
+        "x",
+        "y",
+        "z"
+      ]
     },
     "SizeDir": {
       "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
       "properties": {
+        "type": {
+          "$ref": "#/$defs/SizeType"
+        },
         "name": {
           "type": [
             "string",
@@ -976,14 +973,15 @@
             "null"
           ]
         },
-        "type": {
-          "$ref": "#/definitions/SizeType"
-        },
         "value": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "type"
+      ]
     },
     "SizeType": {
       "type": "string",
@@ -997,16 +995,14 @@
     },
     "Skeleton": {
       "type": "object",
-      "required": [
-        "indices",
-        "offset"
-      ],
       "properties": {
         "indices": {
           "type": "array",
           "items": {
             "type": "array",
-            "items": [
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
               {
                 "type": "integer",
                 "format": "int32"
@@ -1015,9 +1011,7 @@
                 "type": "integer",
                 "format": "int32"
               }
-            ],
-            "maxItems": 2,
-            "minItems": 2
+            ]
           }
         },
         "offset": {
@@ -1025,33 +1019,33 @@
           "format": "int32"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "offset",
+        "indices"
+      ]
     },
     "Split": {
       "type": "object",
-      "required": [
-        "axis",
-        "sizes"
-      ],
       "properties": {
         "axis": {
-          "$ref": "#/definitions/EAxis"
+          "$ref": "#/$defs/EAxis"
         },
         "sizes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SizeDir"
+            "$ref": "#/$defs/SizeDir"
           }
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "axis",
+        "sizes"
+      ]
     },
     "Taper": {
       "type": "object",
-      "required": [
-        "height",
-        "slope"
-      ],
       "properties": {
         "height": {
           "type": "string"
@@ -1060,47 +1054,51 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "height",
+        "slope"
+      ]
     },
     "Texture": {
       "type": "object",
-      "required": [
-        "path"
-      ],
       "properties": {
         "path": {
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ]
     },
     "Translate": {
       "type": "object",
+      "properties": {
+        "coordSystem": {
+          "$ref": "#/$defs/ECoordSystem"
+        },
+        "mode": {
+          "$ref": "#/$defs/EMode"
+        },
+        "x": {
+          "$ref": "#/$defs/SizeDir"
+        },
+        "y": {
+          "$ref": "#/$defs/SizeDir"
+        },
+        "z": {
+          "$ref": "#/$defs/SizeDir"
+        }
+      },
+      "additionalProperties": false,
       "required": [
         "coordSystem",
         "mode",
         "x",
         "y",
         "z"
-      ],
-      "properties": {
-        "coordSystem": {
-          "$ref": "#/definitions/ECoordSystem"
-        },
-        "mode": {
-          "$ref": "#/definitions/EMode"
-        },
-        "x": {
-          "$ref": "#/definitions/SizeDir"
-        },
-        "y": {
-          "$ref": "#/definitions/SizeDir"
-        },
-        "z": {
-          "$ref": "#/definitions/SizeDir"
-        }
-      },
-      "additionalProperties": false
+      ]
     }
   }
 }
