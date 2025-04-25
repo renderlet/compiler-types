@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "compiler-v2"
+name = "compiler-types"
 version = "0.1.0"
 dependencies = [
  "schemars",
