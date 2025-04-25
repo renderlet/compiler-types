@@ -14,9 +14,37 @@
   "definitions": {
     "Attr": {
       "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "value": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "values"
+          ],
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ],
       "required": [
-        "name",
-        "value"
+        "name"
       ],
       "properties": {
         "name": {
@@ -25,21 +53,26 @@
         "range": {
           "anyOf": [
             {
-              "$ref": "#/definitions/Range_of_float"
+              "$ref": "#/definitions/Range_of_double"
             },
             {
               "type": "null"
             }
           ]
-        },
-        "value": {
-          "type": "string"
         }
       },
       "additionalProperties": false
     },
     "Center": {
       "type": "object",
+      "required": [
+        "axesSelector"
+      ],
+      "properties": {
+        "axesSelector": {
+          "$ref": "#/definitions/EAxesSelector"
+        }
+      },
       "additionalProperties": false
     },
     "Color": {
@@ -96,6 +129,17 @@
     },
     "CornerCut": {
       "type": "object",
+      "required": [
+        "length"
+      ],
+      "properties": {
+        "length": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/ECornerCut"
+        }
+      },
       "additionalProperties": false
     },
     "EAxes": {
@@ -115,6 +159,18 @@
         "worldZY"
       ]
     },
+    "EAxesSelector": {
+      "type": "string",
+      "enum": [
+        "xYZ",
+        "x",
+        "y",
+        "z",
+        "xY",
+        "xZ",
+        "yZ"
+      ]
+    },
     "EAxis": {
       "type": "string",
       "enum": [
@@ -128,6 +184,14 @@
       "enum": [
         "world",
         "object"
+      ]
+    },
+    "ECornerCut": {
+      "type": "string",
+      "enum": [
+        "straight",
+        "curve",
+        "negativeCurve"
       ]
     },
     "EMode": {
@@ -257,7 +321,18 @@
       "additionalProperties": false
     },
     "Hemisphere": {
+      "type": "null"
+    },
+    "Hip": {
       "type": "object",
+      "required": [
+        "angle"
+      ],
+      "properties": {
+        "angle": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "InnerArch": {
@@ -265,15 +340,21 @@
       "additionalProperties": false
     },
     "InnerCircle": {
-      "type": "object",
-      "additionalProperties": false
+      "type": "null"
     },
     "InnerSemiCircle": {
-      "type": "object",
-      "additionalProperties": false
+      "type": "null"
     },
     "Insert": {
       "type": "object",
+      "required": [
+        "geometryPath"
+      ],
+      "properties": {
+        "geometryPath": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "Offset": {
@@ -383,6 +464,18 @@
           "properties": {
             "hemisphere": {
               "$ref": "#/definitions/Hemisphere"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "hip"
+          ],
+          "properties": {
+            "hip": {
+              "$ref": "#/definitions/Hip"
             }
           },
           "additionalProperties": false
@@ -605,14 +698,14 @@
             "number",
             "null"
           ],
-          "format": "float"
+          "format": "double"
         },
         "height": {
           "type": [
             "number",
             "null"
           ],
-          "format": "float"
+          "format": "double"
         },
         "points": {
           "type": "array",
@@ -621,11 +714,11 @@
             "items": [
               {
                 "type": "number",
-                "format": "float"
+                "format": "double"
               },
               {
                 "type": "number",
-                "format": "float"
+                "format": "double"
               }
             ],
             "maxItems": 2,
@@ -650,9 +743,17 @@
     },
     "Pyramid": {
       "type": "object",
+      "required": [
+        "height"
+      ],
+      "properties": {
+        "height": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
-    "Range_of_float": {
+    "Range_of_double": {
       "type": "object",
       "required": [
         "end",
@@ -661,11 +762,11 @@
       "properties": {
         "end": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "start": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         }
       }
     },
@@ -690,15 +791,15 @@
           "items": [
             {
               "type": "number",
-              "format": "float"
+              "format": "double"
             },
             {
               "type": "number",
-              "format": "float"
+              "format": "double"
             },
             {
               "type": "number",
-              "format": "float"
+              "format": "double"
             }
           ],
           "maxItems": 3,
@@ -717,14 +818,44 @@
     },
     "RoofGable": {
       "type": "object",
+      "required": [
+        "angle"
+      ],
+      "properties": {
+        "angle": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "RoofHip": {
       "type": "object",
+      "required": [
+        "angle"
+      ],
+      "properties": {
+        "angle": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "Rotate": {
       "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "double"
+        },
+        "y": {
+          "type": "number",
+          "format": "double"
+        },
+        "z": {
+          "type": "number",
+          "format": "double"
+        }
+      },
       "additionalProperties": false
     },
     "Rule": {
@@ -917,6 +1048,18 @@
     },
     "Taper": {
       "type": "object",
+      "required": [
+        "height",
+        "slope"
+      ],
+      "properties": {
+        "height": {
+          "type": "string"
+        },
+        "slope": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "Texture": {
