@@ -39,3 +39,8 @@ fn b() {
 fn c() {
     test("c");
 }
+
+#[test]
+fn d() {
+    test("d");
+}
