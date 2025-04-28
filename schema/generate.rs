@@ -1,4 +1,4 @@
-use compiler_v2::Main;
+use compiler_types::Main;
 use std::fs;
 
 fn main() {

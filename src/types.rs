@@ -5,42 +5,42 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Main {
-    grammars: Grammars,
+    pub grammars: Grammars,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Grammars {
-    version: String,
+    pub version: String,
     #[serde(default)]
     #[serde(skip_serializing_if = "Vec::is_empty")]
-    exports: Vec<Export>,
-    grammar: Vec<Grammar>,
+    pub exports: Vec<Export>,
+    pub grammar: Vec<Grammar>,
     #[serde(default)]
     #[serde(skip_serializing_if = "Vec::is_empty")]
     #[serde(serialize_with = "serde_yaml::with::singleton_map_recursive::serialize")]
     #[serde(deserialize_with = "serde_yaml::with::singleton_map_recursive::deserialize")]
-    shapes: Vec<Shape>,
+    pub shapes: Vec<Shape>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Export {
-    name: String,
-    r#type: String,
+    pub name: String,
+    pub r#type: String,
     #[serde(default)]
     #[serde(skip_serializing_if = "Vec::is_empty")]
-    params: Vec<ExportParam>,
+    pub params: Vec<ExportParam>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct ExportParam {
-    name: String,
-    r#type: VariableType,
+    pub name: String,
+    pub r#type: VariableType,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -66,43 +66,43 @@ pub enum Shape {
 pub struct Polygon {
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    id: Option<u64>,
-    rule: String,
+    pub id: Option<u64>,
+    pub rule: String,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    height: Option<f32>,
+    pub height: Option<f32>,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    ele: Option<f32>,
+    pub ele: Option<f32>,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    building: Option<String>,
+    pub building: Option<String>,
     // points: Vec<glam::Vec2>,
-    points: Vec<(f32, f32)>,
+    pub points: Vec<(f32, f32)>,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    skeleton: Option<Skeleton>,
+    pub skeleton: Option<Skeleton>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Rectangle {
-    width: u32,
-    height: u32,
-    rule: String,
+    pub width: u32,
+    pub height: u32,
+    pub rule: String,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     // position: Option<glam::Vec3>,
-    position: Option<(f32, f32, f32)>,
+    pub position: Option<(f32, f32, f32)>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
-struct Skeleton {
-    offset: i32,
-    indices: Vec<(i32, i32)>,
+pub struct Skeleton {
+    pub offset: i32,
+    pub indices: Vec<(i32, i32)>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -111,24 +111,24 @@ struct Skeleton {
 pub struct Grammar {
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    name: Option<String>,
-    attr: Vec<Attr>,
-    rule: Vec<Rule>,
+    pub name: Option<String>,
+    pub attr: Vec<Attr>,
+    pub rule: Vec<Rule>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Attr {
-    name: String,
+    pub name: String,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    random: Option<Random>,
+    pub random: Option<Random>,
     #[serde(flatten)]
-    value: AttrValue,
+    pub value: AttrValue,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    range: Option<std::ops::Range<f32>>,
+    pub range: Option<std::ops::Range<f32>>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -144,19 +144,19 @@ pub enum AttrValue {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Random {
-    seed: u64,
-    source: String,
-    r#type: String,
+    pub seed: u64,
+    pub source: String,
+    pub r#type: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Rule {
-    name: String,
+    pub name: String,
     #[serde(serialize_with = "serde_yaml::with::singleton_map_recursive::serialize")]
     #[serde(deserialize_with = "serde_yaml::with::singleton_map_recursive::deserialize")]
-    op: Vec<Op>,
+    pub op: Vec<Op>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -192,7 +192,7 @@ pub enum Op {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Center {
-    axes_selector: AxesSelector,
+    pub axes_selector: AxesSelector,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -211,7 +211,7 @@ pub enum AxesSelector {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Copy {
-    name: String,
+    pub name: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -220,8 +220,8 @@ pub struct Copy {
 pub struct CornerCut {
     #[serde(default)]
     #[serde(skip_serializing_if = "is_default")]
-    r#type: CornerCutType,
-    length: String,
+    pub r#type: CornerCutType,
+    pub length: String,
 }
 
 #[derive(Debug, PartialEq, Default, Clone, Copy, Serialize, Deserialize, JsonSchema)]
@@ -242,7 +242,7 @@ pub struct Hemisphere;
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Hip {
-    angle: String,
+    pub angle: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -259,28 +259,28 @@ pub struct InnerSemiCircle;
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Insert {
-    geometry_path: String,
+    pub geometry_path: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Pyramid {
-    height: String,
+    pub height: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct RoofGable {
-    angle: String,
+    pub angle: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct RoofHip {
-    angle: String,
+    pub angle: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -289,13 +289,13 @@ pub struct RoofHip {
 pub struct Rotate {
     #[serde(default)]
     #[serde(skip_serializing_if = "is_default")]
-    x: f32,
+    pub x: f32,
     #[serde(default)]
     #[serde(skip_serializing_if = "is_default")]
-    y: f32,
+    pub y: f32,
     #[serde(default)]
     #[serde(skip_serializing_if = "is_default")]
-    z: f32,
+    pub z: f32,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -316,19 +316,19 @@ pub struct ShapeU {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Taper {
-    height: String,
-    slope: String,
+    pub height: String,
+    pub slope: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Translate {
-    coord_system: CoordSystem,
-    mode: Mode,
-    x: SizeDir,
-    y: SizeDir,
-    z: SizeDir,
+    pub coord_system: CoordSystem,
+    pub mode: Mode,
+    pub x: SizeDir,
+    pub y: SizeDir,
+    pub z: SizeDir,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -341,7 +341,7 @@ pub enum Mode {
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
-enum CoordSystem {
+pub enum CoordSystem {
     World,
     Object,
 }
@@ -350,31 +350,31 @@ enum CoordSystem {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Color {
-    s: String,
+    pub s: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Split {
-    axis: Axis,
-    sizes: Vec<SizeDir>,
+    pub axis: Axis,
+    pub sizes: Vec<SizeDir>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Texture {
-    path: String,
+    pub path: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct SetupProjection {
-    axes: Axes,
-    width: SizeDir,
-    height: SizeDir,
+    pub axes: Axes,
+    pub width: SizeDir,
+    pub height: SizeDir,
     // m_executor_width: TExecutor,
     // m_executor_height: TExecutor,
 }
@@ -382,24 +382,24 @@ pub struct SetupProjection {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Size {
-    centered: bool,
-    x: SizeDir,
-    y: SizeDir,
-    z: SizeDir,
+    pub centered: bool,
+    pub x: SizeDir,
+    pub y: SizeDir,
+    pub z: SizeDir,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct SizeDir {
-    value: String,
+    pub value: String,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    name: Option<String>,
+    pub name: Option<String>,
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
-    repeat: Option<bool>, // TODO: not sure if this should be distinct from r#type
-    r#type: SizeType,
+    pub repeat: Option<bool>, // TODO: not sure if this should be distinct from r#type
+    pub r#type: SizeType,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -442,15 +442,15 @@ pub enum SizeType {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Extrude {
-    height: String, // TODO: should not be string
+    pub height: String, // TODO: should not be string
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Comp {
-    name: CompName,
-    value: String, // TODO: should not be string
+    pub name: CompName,
+    pub value: String, // TODO: should not be string
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -469,10 +469,10 @@ pub enum CompName {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct Offset {
-    distance: String, // TODO: should not be string
+    pub distance: String, // TODO: should not be string
     #[serde(skip_serializing_if = "Option::is_none")]
-    border: Option<String>, // TODO: should not be string
-    inside: String,   // TODO: should not be string
+    pub border: Option<String>, // TODO: should not be string
+    pub inside: String,   // TODO: should not be string
 }
 
 // pub enum Expression<T> {

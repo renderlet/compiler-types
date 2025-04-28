@@ -1,6 +1,6 @@
 use similar_asserts::assert_eq;
 
-use compiler_v2::Main;
+use compiler_types::Main;
 
 fn format(input: &str) -> String {
     use yaml_rust::{YamlEmitter, YamlLoader};
