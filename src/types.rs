@@ -82,6 +82,9 @@ pub struct Polygon {
     #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub skeleton: Option<Skeleton>,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub levels: Option<String>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
