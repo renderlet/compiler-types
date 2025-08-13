@@ -60,6 +60,15 @@ pub enum Shape {
     Rectangle(Rectangle),
 }
 
+impl Shape {
+    pub fn rule(&self) -> &str {
+        match self {
+            Shape::Polygon(polygon) => polygon.rule.as_str(),
+            Shape::Rectangle(rectangle) => rectangle.rule.as_str(),
+        }
+    }
+}
+
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
