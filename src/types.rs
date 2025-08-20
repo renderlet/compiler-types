@@ -45,6 +45,7 @@ pub struct ExportParam {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum VariableType {
     F32,
     F64,
@@ -209,6 +210,7 @@ pub struct Center {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum AxesSelector {
     XYZ,
     X,
@@ -238,6 +240,7 @@ pub struct CornerCut {
 
 #[derive(Debug, PartialEq, Default, Clone, Copy, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum CornerCutType {
     #[default]
     Straight,
@@ -345,6 +348,7 @@ pub struct Translate {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum Mode {
     Absolute,
     Relative,
@@ -353,6 +357,7 @@ pub enum Mode {
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
+#[repr(u32)]
 pub enum CoordSystem {
     World,
     Object,
@@ -416,6 +421,7 @@ pub struct SizeDir {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum Axis {
     X,
     Y,
@@ -424,6 +430,7 @@ pub enum Axis {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum Axes {
     #[serde(rename = "scope.xy")]
     ScopeXY,
@@ -442,6 +449,7 @@ pub enum Axes {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum SizeType {
     Absolute,
     Relative,
@@ -467,6 +475,7 @@ pub struct Comp {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
+#[repr(u32)]
 pub enum CompName {
     Front,
     Right,
